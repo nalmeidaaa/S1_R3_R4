@@ -8,6 +8,7 @@ const produtoRepository = {
             await conn.beginTransaction()
             const sql = `INSERT INTO produtos (id_categoria, nome, descricao, preco, caminho_imagem, quantidade_estoque) VALUES (?, ?, ?, ?, ?, ?) `;
             const values = [produto.idCategoria, produto.nome, produto.descricao, produto.preco, produto.caminho_imagem, produto.quantidade_estoque];
+
             const [rows] = await connection.execute(sql, values);
             return rows;
         } catch (error) {
