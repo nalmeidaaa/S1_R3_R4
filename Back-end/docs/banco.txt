@@ -1,0 +1,28 @@
+- tabela de pedidos
+id_pedidos
+data pedido
+lista produtos FK
+quantidade_itens
+valor total
+status_pedidos
+
+- tabela de produto
+id_produto
+nome
+descrição
+preco
+imagem
+quantidade estoque
+categoria FK
+
+- tabela de categoria
+id_categoria 
+nome
+descricao
+
+- tabela de itens_pedidos
+id_itens
+id_produto
+id_pedidos
+quantidade
+valor_item
