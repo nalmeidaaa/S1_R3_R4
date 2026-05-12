@@ -54,7 +54,6 @@ const produtoRepository = {
     selecionar: async () => {
         const conn = await connection.getConnection();
         try {
-            await conn.beginTransaction()
             const sql = 'SELECT * FROM produtos';
             const [rows] = await connection.execute(sql);
             return rows;

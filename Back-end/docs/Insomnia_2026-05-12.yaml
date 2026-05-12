@@ -1,0 +1,478 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: S1_R3_R4
+meta:
+  id: wrk_c3318be8461b42b585b00a74c6b3e889
+  created: 1778588182948
+  modified: 1778588182948
+  description: ""
+collection:
+  - name: Categorias
+    meta:
+      id: fld_86a98545fc0943d9afc4c7dd9a074ced
+      created: 1778588698471
+      modified: 1778589208174
+      sortKey: -1778588698471
+      description: ""
+    children:
+      - url: localhost:8000/categorias
+        name: Buscar Categorias
+        meta:
+          id: req_bfc852bcee4f485dbe99830e2969cdaa
+          created: 1778588250514
+          modified: 1778589356299
+          isPrivate: false
+          description: ""
+          sortKey: -1778588702210
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/categorias
+        name: Criar Categoria
+        meta:
+          id: req_eb92cc1a82b04eec80eb438cd374691f
+          created: 1778588707084
+          modified: 1778589343104
+          isPrivate: false
+          description: ""
+          sortKey: -1778588702310
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "laranja",
+            	"descricao": "loja de laranjas"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/categorias/3
+        name: Deletar Categoria
+        meta:
+          id: req_b99e83b98be94c05bd367781913bcc7c
+          created: 1778589153088
+          modified: 1778589379249
+          isPrivate: false
+          description: ""
+          sortKey: -1778588702410
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/categorias/3
+        name: Atualizar Categoria
+        meta:
+          id: req_fc6b9cb87a6d4752a5c9fc4612c6c9bf
+          created: 1778589209433
+          modified: 1778589367958
+          isPrivate: false
+          description: ""
+          sortKey: -1778588702510
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "kiwi",
+            	"descricao": "loja de kiwis"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Produtos
+    meta:
+      id: fld_1f19fd48d5174a65bd1f5064fb0d7573
+      created: 1778589744068
+      modified: 1778589751310
+      sortKey: -1778589744068
+      description: ""
+    children:
+      - url: localhost:8000/produtos
+        name: Buscar Produtos
+        meta:
+          id: req_bd3f42f4d7f94155a4ee5c1302bf107d
+          created: 1778589980298
+          modified: 1778591230936
+          isPrivate: false
+          description: ""
+          sortKey: -1778589982319
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/produtos
+        name: Criar Produto
+        meta:
+          id: req_7b227ec204394c458eff25d743031224
+          created: 1778590030123
+          modified: 1778590919936
+          isPrivate: false
+          description: ""
+          sortKey: -1778590030123
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - name: idCategoria
+              value: "1"
+              description: ""
+              disabled: false
+            - name: nome
+              value: moranguinho
+              description: ""
+              disabled: false
+            - name: preco
+              value: "10"
+              description: ""
+              disabled: false
+            - name: descricao
+              value: morango pequeno vermelho
+              description: ""
+              disabled: false
+            - name: imagem
+              value: ""
+              description: ""
+              disabled: false
+              fileName: C:\Users\48396721807\Downloads\PerfectStrawberry.jpg
+              type: file
+            - name: quantidade_estoque
+              value: "2"
+              description: ""
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/produtos/1
+        name: Atualizar Produto
+        meta:
+          id: req_477c3090f6764de2930b13711ebed8ee
+          created: 1778590943905
+          modified: 1778591048242
+          isPrivate: false
+          description: ""
+          sortKey: -1778590943905
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"idCategoria":"1",
+            	"nome":"morangao",
+            	"preco":"15",
+            	"descricao":"morango grande",
+            	"quantidade_estoque":"4"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/produtos/1
+        name: Deletar Produto
+        meta:
+          id: req_e2d3e9a0195a47e39261c2841ba277df
+          created: 1778591233578
+          modified: 1778591249352
+          isPrivate: false
+          description: ""
+          sortKey: -1778591233578
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Pedidos
+    meta:
+      id: fld_88d41e52fc614e4890a2e51b79595bef
+      created: 1778592873875
+      modified: 1778593510140
+      sortKey: -1778592873875
+      description: ""
+    children:
+      - url: localhost:8000/pedidos
+        name: Buscar Pedidos
+        meta:
+          id: req_d1c678f4bf1646cd886382b75d7a8713
+          created: 1778592877722
+          modified: 1778592895018
+          isPrivate: false
+          description: ""
+          sortKey: -1778592886957
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/pedidos
+        name: Criar Pedido
+        meta:
+          id: req_5cbdd7a89c0943b68f1daff3f855002e
+          created: 1778592901386
+          modified: 1778593485558
+          isPrivate: false
+          description: ""
+          sortKey: -1778592887057
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"status": "Aberto"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/pedidos/1
+        name: Atualizar Pedido
+        meta:
+          id: req_dec417e0291f45969229e274cb8bfe2e
+          created: 1778593178997
+          modified: 1778593207278
+          isPrivate: false
+          description: ""
+          sortKey: -1778593178997
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"status":"Finalizado"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Itens Pedido
+    meta:
+      id: fld_b617c99c7f9c48939cca6a43bce3daa6
+      created: 1778594132645
+      modified: 1778594135900
+      sortKey: -1778594132645
+      description: ""
+    children:
+      - url: localhost:8000/ItensPedido
+        name: Criar item do pedido
+        meta:
+          id: req_e36d3a351b8c4653a62f01d536aee8e8
+          created: 1778594223210
+          modified: 1778601578522
+          isPrivate: false
+          description: ""
+          sortKey: -1778594224648
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"pedidoId": "2",
+            	"produtoId": "2",
+            	"quantidade": "2"
+            }
+        parameters:
+          - name: produtoId
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/ItensPedido/20
+        name: Atualizar item do pedido
+        meta:
+          id: req_964c45791f284e0db0140be81b04b821
+          created: 1778598325817
+          modified: 1778601589164
+          isPrivate: false
+          description: ""
+          sortKey: -1778598325817
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"pedidoId": "2",
+            	"produtoId": "2",
+            	"quantidade": "100"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8000/ItensPedido/5
+        name: Deletar item do pedido
+        meta:
+          id: req_0e90e97bd204408b863cb9bc0abbc2fd
+          created: 1778601356009
+          modified: 1778601585324
+          isPrivate: false
+          description: ""
+          sortKey: -1778598325917
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_e6720d262b8d18c7fbf2e888d1bff47279a65862
+    created: 1778588182996
+    modified: 1778588182996
+environments:
+  name: Base Environment
+  meta:
+    id: env_e6720d262b8d18c7fbf2e888d1bff47279a65862
+    created: 1778588182980
+    modified: 1778588182980
+    isPrivate: false

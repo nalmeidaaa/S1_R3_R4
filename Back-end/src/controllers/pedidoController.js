@@ -6,7 +6,8 @@ const pedidoController = {
 
     criar: async (req, res) => {
 
-        try {let { ClienteId, clienteId, itens } = req.body;
+        try {
+            let { ClienteId, clienteId, itens } = req.body;
             if (!clienteId) {
                 clienteId = ClienteId;
             }
