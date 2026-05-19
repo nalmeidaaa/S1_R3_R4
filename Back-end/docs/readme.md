@@ -49,6 +49,31 @@ GET /produtos
 ### Buscar produto por ID
 GET /produtos/:id
 
+---
+
+## Rotas - Itens Pedidos 
+
+### Criar itens pedido
+POST /itensPedidos
+
+### Editar itens pedidos 
+PUT /itensPedidos/:id
+
+### Deletar itens pedidos
+DELETE /itensPedidos /:id
+
+---
+
+## Rotas - Pedidos
+
+### Listar pedido
+GET /pedidos
+
+### Criar pedido
+POST /pedidos
+
+### Editar pedido 
+PUT /pedidos/:id
 
 ## Banco de Dados
 
@@ -58,9 +83,9 @@ GET /produtos/:id
 - pedidos
 - itens_pedidos
 
-## Autores
-- Angela Barbosa Soares
-- Isabeli Alexandre da Silva Araújo
-- Isabelly de Assis Gonçalves
-- Nicolas Almeida Barbosa
-- Sabrina Fernandes Dragoneti
+## Autores e suas funções:
+- Angela Barbosa Soares: Front-end.
+- Isabeli Alexandre da Silva Araújo: Banco de dados; documentação; front-end.
+- Isabelly de Assis Gonçalves: Front-end.
+- Nicolas Almeida Barbosa: Back-end.
+- Sabrina Fernandes Dragoneti: Back-end.
