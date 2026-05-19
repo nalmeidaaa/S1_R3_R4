@@ -1,5 +1,4 @@
 export class Pedido {
-
     #id;
     #subTotal;
     #status;

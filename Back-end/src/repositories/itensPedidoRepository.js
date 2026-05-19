@@ -13,50 +13,27 @@ const itensPedidoRepository = {
             // INSERT ITEM
             const sql = `
                 INSERT INTO itens_pedido 
-                (
-                    pedidoId,
-                    produtoId,
-                    quantidade,
-                    valorItem
-                ) 
-                VALUES (?, ?, ?, ?)
-            `;
+                (pedidoId, produtoId, quantidade, valorItem) VALUES (?, ?, ?, ?)`;
 
-            const values = [
-                itemPedido.pedidoId,
-                itemPedido.produtoId,
-                itemPedido.quantidade,
-                itemPedido.valorItem
-            ];
+            const values = [itemPedido.pedidoId, itemPedido.produtoId, itemPedido.quantidade,itemPedido.valorItem];
 
             const [result] = await conn.execute(sql, values);
 
             // RECALCULAR SUBTOTAL
-            await recalcularSubtotal(
-                conn,
-                itemPedido.pedidoId
-            );
-
-            await conn.commit();
-
+            await recalcularSubtotal(conn, itemPedido.pedidoId);
+            await conn.commit(); //salvar definitivamente todas as alterações feitas no banco de dados 
             return result;
 
         } catch (error) {
-
             await conn.rollback();
-
             throw error;
-
         } finally {
-
             conn.release();
-
         }
 
     },
 
   atualizar: async (id, quantidade) => {
-
     const conn = await connection.getConnection();
 
     try {
@@ -65,16 +42,7 @@ const itensPedidoRepository = {
 
         // BUSCA ITEM + PREÇO PRODUTO
         const [itemAtual] = await conn.execute(
-            `
-                SELECT 
-                    ip.pedidoId,
-                    ip.produtoId,
-                    p.preco
-                FROM itens_pedido ip
-                INNER JOIN produtos p
-                    ON p.id_produto = ip.produtoId
-                WHERE ip.idItem = ?
-            `,
+            `SELECT ip.pedidoId, ip.produtoId, p.preco FROM itens_pedido ip INNER JOIN produtos p ON p.id_produto = ip.produtoId WHERE ip.idItem = ?`,
             [id]
         );
 
@@ -86,27 +54,16 @@ const itensPedidoRepository = {
 
         const precoProduto = Number(itemAtual[0].preco);
 
-        const novoValorItem = (
-            precoProduto * quantidade
-        ).toFixed(2);
+        const novoValorItem = (precoProduto * quantidade).toFixed(2);
 
         // ATUALIZA ITEM
         const sqlUpdate = `
             UPDATE itens_pedido 
-            SET 
-                quantidade = ?,
-                valorItem = ?
-            WHERE idItem = ?
-        `;
+            SET quantidade = ?, valorItem = ? WHERE idItem = ?`;
 
         await conn.execute(
             sqlUpdate,
-            [
-                quantidade,
-                novoValorItem,
-                id
-            ]
-        );
+            [quantidade, novoValorItem,id]);
 
         // RECALCULAR SUBTOTAL
         await recalcularSubtotal(
@@ -116,42 +73,27 @@ const itensPedidoRepository = {
 
         await conn.commit();
 
-        return {
-            id,
-            quantidade,
-            valorItem: novoValorItem
-        };
+        return {id, quantidade,valorItem: novoValorItem};
 
     } catch (error) {
-
         await conn.rollback();
-
         throw error;
 
     } finally {
-
         conn.release();
-
     }
 
 },
 
     deletar: async (id) => {
-
         const conn = await connection.getConnection();
-
         try {
 
             await conn.beginTransaction();
 
             // PEGA pedidoId antes de deletar
             const [item] = await conn.execute(
-                `
-                    SELECT pedidoId 
-                    FROM itens_pedido 
-                    WHERE idItem = ?
-                `,
-                [id]
+                `SELECT pedidoId  FROM itens_pedido WHERE idItem = ?`, [id]
             );
 
             if (item.length === 0) {
@@ -162,33 +104,20 @@ const itensPedidoRepository = {
 
             // DELETE ITEM
             await conn.execute(
-                `
-                    DELETE FROM itens_pedido 
-                    WHERE idItem = ?
-                `,
-                [id]
-            );
+                ` DELETE FROM itens_pedido WHERE idItem = ?`,[id]);
 
             // RECALCULAR SUBTOTAL
-            await recalcularSubtotal(
-                conn,
-                pedidoId
-            );
+            await recalcularSubtotal(conn, pedidoId);
 
             await conn.commit();
-
             return { id };
 
         } catch (error) {
-
             await conn.rollback();
-
             throw error;
 
         } finally {
-
             conn.release();
-
         }
 
     }
@@ -200,14 +129,7 @@ const itensPedidoRepository = {
 const recalcularSubtotal = async (conn, pedidoId) => {
 
     const [resultado] = await conn.execute(
-        `
-            SELECT 
-                SUM(valorItem) AS subtotal,
-                SUM(quantidade) AS quantidadeItens
-            FROM itens_pedido 
-            WHERE pedidoId = ?
-        `,
-        [pedidoId]
+        `SELECT SUM(valorItem) AS subtotal,  SUM(quantidade) AS quantidadeItens  FROM itens_pedido WHERE pedidoId = ?`, [pedidoId]
     );
 
     const novoSubtotal = resultado[0].subtotal || 0;
@@ -215,25 +137,10 @@ const recalcularSubtotal = async (conn, pedidoId) => {
     const novaQuantidadeItens = resultado[0].quantidadeItens || 0;
 
     await conn.execute(
-        `
-            UPDATE pedidos 
-            SET 
-                subTotal = ?,
-                quantidade_itens = ?
-            WHERE id_pedido = ?
-        `,
-        [
-            novoSubtotal,
-            novaQuantidadeItens,
-            pedidoId
-        ]
+        `UPDATE pedidos SET subTotal = ?,  quantidade_itens = ? WHERE id_pedido = ?`,
+        [novoSubtotal, novaQuantidadeItens,pedidoId]
     );
-
-    return {
-        novoSubtotal,
-        novaQuantidadeItens
-    };
-
+    return {novoSubtotal, novaQuantidadeItens};
 };
 
 export default itensPedidoRepository;

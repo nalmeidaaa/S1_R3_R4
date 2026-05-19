@@ -7,7 +7,7 @@ import 'dotenv/config';
 
 class Database {
     static #instance = null;
-    #pool = null;
+    #pool = null; //gerenciar conexão com banco de dados
 
     //Funcão/Método privada
     #createPool(){

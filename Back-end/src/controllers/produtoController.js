@@ -55,7 +55,7 @@ const produtoController = {
         try {
             const id = req.params.id;
             const {idCategoria, nome, descricao, preco, quantidade_estoque} = req.body;
-            const produto = Produto.alterar({idCategoria, nome, descricao, preco, quantidade_estoque, caminho_imagem: undefined }, id);
+            const produto = Produto.alterar({idCategoria, nome, descricao, preco, quantidade_estoque, caminho_imagem: undefined }, id); //vai alterar tudo que está listadp
             const result = await produtoRepository.editar(produto);
             res.status(200).json({ result });
 
@@ -65,6 +65,7 @@ const produtoController = {
         }
     },
 
+    //Deleta o produto
     deletar: async (req, res) => {
         try { const id = req.params.id;
             const result = await produtoRepository.deletar(id);
@@ -80,6 +81,7 @@ const produtoController = {
         }
     },
 
+    //seleciona todos os produtos existentes
     selecionar: async (req, res) => {
         try {
             const result = await produtoRepository.selecionar();
@@ -94,12 +96,14 @@ const produtoController = {
         }
     },
 
+
+    //seleciona um produto específico usando o seu ID
     selecionarPorId: async (req, res) => {
         try {
             const id = req.params.id;
             const produto = await produtoRepository.selecionarUm(id);
 
-            if (!produto || produto.length === 0) {
+            if (!produto || produto.length === 0) { //Se o produto não existir ele dá erro
                 return res.status(404).json({
                     message: "Produto não encontrado."
                 });

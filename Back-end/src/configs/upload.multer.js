@@ -33,6 +33,7 @@ const createMulter = ({ pasta, tiposPermitidos, tamanhoArquivo }) => {
             return cb(new Error("Tipo de arquivo não permitido")); // Verifica o tipo de arquivo
         }
         cb(null, true); // Continua o processo se o tipo for permitido
+        //cb = callback, ve se não tem erro e depois retorna o valor se der tudo certo
     }
 
     return multer({

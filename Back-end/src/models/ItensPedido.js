@@ -67,29 +67,18 @@ export class ItensPedido {
         }
     }
 
-    static calcularSubTotalItens(itens) {
+    static calcularSubTotalItens(itens) { 
         return itens.reduce(
-            (total, item) => total + (item.valorItem * item.quantidade), 0
-        );
+            (total, item) => total + (item.valorItem * item.quantidade), 0); //Pega o total e soma com o valor do item multiplicado pela quantidade dos itens 
     }
 
     // DESIGN PATTERN
     static criar(dados) {
-        return new ItensPedido(
-            dados.produtoId,
-            dados.quantidade,
-            dados.valorItem,
-            dados.pedidoId,
-        );
+        return new ItensPedido(dados.produtoId, dados.quantidade, dados.valorItem,dados.pedidoId);
     }
 
     static editar(dados, id) {
-        return new ItensPedido(
-            dados.produtoId,
-            dados.quantidade,
-            dados.valorItem,
-            dados.pedidoId,
-        );
+        return new ItensPedido(dados.produtoId, dados.quantidade, dados.valorItem, dados.pedidoId);
     }
 
 }

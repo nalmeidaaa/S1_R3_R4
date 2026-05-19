@@ -6,15 +6,16 @@ const pedidoController = {
 
     criar: async (req, res) => {
 
+        //Cria um pedido
         try {
             let { ClienteId, clienteId, itens } = req.body;
             if (!clienteId) {
-                clienteId = ClienteId;
+                clienteId = ClienteId; //Evita o erro por falta formatação, se uma pessoa escrever de um jeito ou outro ele lê mesmo assim
             }
 
-            const quantidade_itens = itens ? itens.length : 0;
+            const quantidade_itens = itens ? itens.length : 0; //se a variável itens existir ele acessa o lenght, senão ele ignora
             const subTotal = 0;
-            const pedido = Pedido.criar({ subTotal, status: statusPed.ABERTO, quantidade_itens});
+            const pedido = Pedido.criar({ subTotal, status: statusPed.ABERTO, quantidade_itens}); //Ele começa com esses valores iniciais assim que o pedido é criado
             const result = await pedidoRepository.criar(pedido, clienteId);
 
             return res.status(201).json({
@@ -28,7 +29,8 @@ const pedidoController = {
             });
         }
     },
-
+    
+    //Seleciona todos os pedidos 
     selecionar: async (req, res) => {
         try { const result = await pedidoRepository.selecionar();
              return res.json(result);
@@ -40,11 +42,12 @@ const pedidoController = {
             });
         }
     },
-
+    
+    //Atualiza os status e a quantidade de itens apenas 
     atualizar: async (req, res) => {
         try {
             const id = req.params.id;
-            let { Status, status } = req.body;
+            let { Status, status } = req.body; //evita erro por falta de formatação
 
             if (!Status) {
                 Status = status;
@@ -65,9 +68,10 @@ const pedidoController = {
 
     },
 
+    //Deleta o pedido
     deletar: async (req, res) => {
         try {
-            const idPedido = req.params.id;
+            const idPedido = req.params.id; //Procura o id para poder excluir
             const result = await pedidoRepository.deletar(idPedido);
             return res.json({
                 message: "Pedido deletado com sucesso",

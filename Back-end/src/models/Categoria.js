@@ -1,3 +1,5 @@
+// métodos getter e setter serve para acessar e modificar os atributos de uma classe de maneira controlada
+
 export class Categoria {
     #id;
     #nome;

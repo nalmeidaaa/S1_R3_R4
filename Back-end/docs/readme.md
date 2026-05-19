@@ -13,6 +13,9 @@ Projeto desenvolvido para controle de pedidos, produtos, itens e categorias de p
 - Cadastro de categorias;
 - Controle de estoque.
 
+## Diagrama de classes
+![Diagrama de classes](diagramaClasses.png)
+
 ## Rotas - Categorias
 
 ### Criar categoria

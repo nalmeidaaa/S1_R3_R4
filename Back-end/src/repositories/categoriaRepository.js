@@ -4,14 +4,14 @@ const categoriaRepository = {
     criar: async (categoria) => {
         const conn = await connection.getConnection();
         try {
-            await conn.beginTransaction();
+            await conn.beginTransaction(); //iniciar uma transação de banco de dados e aguardar a confirmação do servidor de que o processo foi iniciado antes de avançar
             const sql = 'INSERT INTO categorias (nome, descricao) VALUES (?, ?)';
             const values = [categoria.nome, categoria.descricao];
             const [rows] = await conn.execute(sql, values);
             await conn.commit();
             return rows;
         } catch (error) {
-            await conn.rollback();
+            await conn.rollback(); //volta tudo caso de algum erro para verificar de novo
             throw error;
         } finally {
             conn.release();
@@ -28,7 +28,7 @@ const categoriaRepository = {
             await conn.rollback();
             throw error;
         } finally {
-            conn.release();
+            conn.release(); //executa a função se der tudo certo
         }
     },
     deletar: async (id) => {
@@ -49,9 +49,9 @@ const categoriaRepository = {
         const conn = await connection.getConnection();
         try {
             const sql = 'SELECT * FROM categorias';
-
             const [rows] = await connection.execute(sql);
             return rows
+
         } catch (error) {
             await conn.rollback();
             throw error;
@@ -66,6 +66,7 @@ const categoriaRepository = {
             const values = [id]
             const [rows] = await connection.execute(sql, values);
             return rows
+            
         } catch (error) {
             await conn.rollback();
             throw error;
